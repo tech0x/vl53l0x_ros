@@ -1,2 +1,0 @@
-- setup-file:
-    local-name: /home/pi/catkin_ws/src/vl53l0x_ros/vl53l0x/build/devel/setup.sh
