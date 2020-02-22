@@ -16,19 +16,23 @@ int main(int argc, char **argv){
 	int iDistance;
 	int model, revision;
 	int long_range = 0;
+	int i2c_bus, i2c_address;
 	double poll_rate = 0;
 
 	ros::init(argc, argv, "vl53l0x");
 	ros::NodeHandle nh, nh_priv("~");
 
+	sensor_msgs::Range range;
 	nh_priv.param("long_range", long_range, 0);
 	nh_priv.param("poll_rate", poll_rate, 100.0);
+	nh_priv.param("i2c_bus", i2c_bus, 1);
+	nh_priv.param("i2c_address", i2c_address, 0x29);
+	nh_priv.param<std::string>("frame_id", range.header.frame_id, "");
 
-	// For Raspberry Pi's, the I2C channel is usually 1
-	// For other boards (e.g. OrangePi) it's 0
-	i = tofInit(0, 0x29, long_range); // set long range mode (up to 2m)
+	i = tofInit(i2c_bus, i2c_address, long_range);
 	if (i != 1){
-		return -1; // problem - quit
+	    std::cout << "Sensor Init Error " << i << "\n";
+	    return -1;
 	}
 
 	i = tofGetModel(&model, &revision);
@@ -40,7 +44,6 @@ int main(int argc, char **argv){
 
 	ROS_INFO("VL53L0X: start ranging");
 
-	sensor_msgs::Range range;
 	ros::Publisher range_pub = nh_priv.advertise<sensor_msgs::Range>("range", 20);
 
 	ros::Rate r(poll_rate);

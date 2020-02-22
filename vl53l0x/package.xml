@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <package format="2">
-  <name>vl53l0x_ros</name>
+  <name>vl53l0x</name>
   <version>0.0.0</version>
   <description>The vl53l0x_ros package</description>
 
@@ -9,7 +9,7 @@
   <!-- <maintainer email="jane.doe@example.com">Jane Doe</maintainer> -->
   <maintainer email="tech0xx@outlook.com">tech0xx@outlook.com</maintainer>
 
-
+  <url type="repository">https://github.com/tech0x/vl53l0x_ros</url>
   <!-- One license tag required, multiple allowed, one license per tag -->
   <!-- Commonly used license strings: -->
   <!--   BSD, MIT, Boost Software License, GPLv2, GPLv3, LGPLv2.1, LGPLv3 -->
